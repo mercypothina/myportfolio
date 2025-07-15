@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercy | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e7f0ff;
+      --text: #1a1a1a;
+      --primary: #5561ff;
+      --card: #ffffff;
+      --glow: rgba(85, 97, 255, 0.2);
+    }
+    body.dark {
+      --bg: #111;
+      --text: #f1f1f1;
+      --card: #1e1e1e;
+      --glow: rgba(85, 255, 255, 0.15);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    header {
+      background: var(--card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      box-shadow: 0 4px 20px var(--glow);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      animation: wave 2s infinite ease-in-out;
+      transform-origin: 70% 70%;
+      display: inline-block;
+    }
+    nav {
+      animation: slideIn 2s ease-in-out infinite alternate;
+    }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: var(--primary);
+    }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10% { transform: rotate(8deg); }
+      30% { transform: rotate(-8deg); }
+      50% { transform: rotate(4deg); }
+    }
+    @keyframes slideIn {
+      0% { transform: translateX(50px); opacity: 0.5; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    .dark-toggle {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--glow);
+      transition: 0.4s ease;
+    }
+    .dark-toggle:hover {
+      transform: scale(1.05) rotate(-2deg);
+      background: #6a75ff;
+    }
+    section {
+      min-height: 100vh;
+      padding: 80px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      scroll-snap-align: start;
+    }
+    main {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+    h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    ul { list-style: none; padding: 0; }
+    ul li::before {
+      content: '✔️';
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    .projects {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .project {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 8px 24px var(--glow);
+      transition: transform 0.4s;
+      cursor: pointer;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .project::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, rgba(255, 0, 150, 0.4), rgba(0, 204, 255, 0.4), rgba(255, 255, 0, 0.4));
+      top: 100%;
+      left: -50%;
+      transform: rotate(25deg);
+      background-size: 400% 400%;
+      animation: gradientMove 5s linear infinite;
+      transition: top 0.4s ease-in-out;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 16px;
+      opacity: 0;
+    }
+    .project:hover::before {
+      top: 0;
+      opacity: 1;
+    }
+    .project:hover {
+      transform: translateY(-10px);
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    form {
+      max-width: 500px;
+      width: 100%;
+      margin-top: 20px;
+      text-align: left;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--text);
+    }
+    form button {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    form button:hover {
+      background: #6a75ff;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px var(--primary);
+    }
+    footer {
+      background: var(--card);
+      padding: 20px;
+      text-align: center;
+    }
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      font-size: 18px;
+      display: none;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    #scrollTopBtn:hover {
+      transform: scale(1.2);
+      background: #6a75ff;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portfolio.</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="dark-toggle" onclick="toggleDark()">Toggle Theme</button>
+  </header>
+
+  <main>
+    <section>
+      <h2>Welcome</h2>
+      <p>I'm <strong>Mercy</strong>, a passionate frontend developer dedicated to crafting engaging and accessible digital experiences.</p>
+      <p>Explore my portfolio to see projects that showcase my skills and creativity.</p>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am currently pursuing B.Tech in Computer Science. I specialize in building responsive, user-friendly websites and applications with modern web technologies.</p>
+      <p><b>Skills:</b></p>
+      <ul>
+        <li><b>Languages:</b> C, Java</li>
+        <li><b>Web Development:</b> HTML, CSS, JavaScript</li>
+      </ul>
+      <p>My goal is to contribute to meaningful projects that impact users positively.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="project" onclick="window.open('index.html')">
+          <h3>Portfolio Website</h3>
+          <p>A personal website built with clean semantic HTML and responsive design.</p>
+        </div>
+        <div class="project" onclick="window.open('https://mercypothina.github.io/to_do_list/')">
+          <h3>To-Do List App</h3>
+          <p>Built using JavaScript with Local Storage support for task persistence.</p>
+        </div>
+        <div class="project" onclick="window.open('https://mercypothina.github.io/product_filter/')">
+          <h3>Product Filter Page</h3>
+          <p>Responsive e-commerce layout with dynamic filtering and sorting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <p id="responseMsg"></p>
+    </section>
+
+    <footer>
+      <p>&copy; Mercy's Portfolio. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <script>
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+    const form = document.getElementById('contactForm');
+    const responseMsg = document.getElementById('responseMsg');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      responseMsg.textContent = 'Sending...';
+      const formData = new FormData(form);
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/mercypothina@gmail.com', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success === 'true' || data.message) {
+          responseMsg.style.color = 'green';
+          responseMsg.textContent = 'Form successfully submitted.';
+          form.reset();
+          setTimeout(() => responseMsg.textContent = '', 3000);
+        } else throw new Error('Error');
+      } catch {
+        responseMsg.style.color = 'red';
+        responseMsg.textContent = 'Submission failed. Try again.';
+      }
+    });
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
